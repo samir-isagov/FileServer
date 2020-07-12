@@ -1,11 +1,13 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using FileServer.WebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FileServer.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api")]
     [ApiController]
     public class FileController : ControllerBase
