@@ -4,6 +4,7 @@ using FileServer.WebAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using MimeTypes;
 
 namespace FileServer.WebAPI.Controllers
 {
@@ -21,18 +22,17 @@ namespace FileServer.WebAPI.Controllers
         }
 
         [HttpGet("{subFolder}/{fileName}")]
-        public async Task<ActionResult<byte[]>> GetFile([FromRoute]FileModel fileModel)
+        public ActionResult GetFile([FromRoute] FileModel fileModel)
         {
             string filePath = GetFilePath(rootFolder, fileModel.SubFolder, fileModel.FileName);
+            Stream stream = !System.IO.File.Exists(filePath) ? null : new FileStream(filePath, FileMode.Open);
 
-            if (!System.IO.File.Exists(filePath))
-            {
+            if (stream == null)
                 return NotFound();
-            }
 
-            byte[] file = await System.IO.File.ReadAllBytesAsync(filePath);
-
-            return Ok(file);
+            string fileExtension = fileModel.FileName.Split('.')[1];
+            string mimeType = MimeTypeMap.GetMimeType(fileExtension);
+            return File(stream, mimeType); 
         }
 
         #region Helper Methods
