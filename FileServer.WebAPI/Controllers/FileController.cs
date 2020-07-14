@@ -14,7 +14,7 @@ namespace FileServer.WebAPI.Controllers
     public class FileController : ControllerBase
     {
         private readonly IWebHostEnvironment _environment;
-        private readonly string rootFolder = "App_Data";
+        private readonly string _rootFolder = "App_Data";
 
         public FileController(IWebHostEnvironment environment)
         {
@@ -22,9 +22,9 @@ namespace FileServer.WebAPI.Controllers
         }
 
         [HttpGet("{subFolder}/{fileName}")]
-        public ActionResult GetFile([FromRoute] FileModel fileModel)
+        public IActionResult GetFile([FromRoute] FileModel fileModel)
         {
-            string filePath = GetFilePath(rootFolder, fileModel.SubFolder, fileModel.FileName);
+            string filePath = GetFilePath(_rootFolder, fileModel.SubFolder, fileModel.FileName);
             Stream stream = !System.IO.File.Exists(filePath) ? null : new FileStream(filePath, FileMode.Open);
 
             if (stream == null)
@@ -32,7 +32,33 @@ namespace FileServer.WebAPI.Controllers
 
             string fileExtension = fileModel.FileName.Split('.')[1];
             string mimeType = MimeTypeMap.GetMimeType(fileExtension);
-            return File(stream, mimeType); 
+            return File(stream, mimeType);
+        }
+
+        [HttpPost("{subFolder}")]
+        public IActionResult AddFile(string subFolder)
+        {
+            //todo 1. Generate File Name
+            //todo 2. Get File Path
+            //todo 3. Read file as stream from Request.Body
+            //todo 4. Write FileStream to FilePath
+            return null;
+        }
+
+        [HttpPost("{subFolder}/{fileName}")]
+        public async Task<IActionResult> AddFile([FromForm] AddFileModel fileModel)
+        {
+            string filePath = GetFilePath(_rootFolder, fileModel.SubFolder, fileModel.FileName);
+
+            await using (var stream = fileModel.File.OpenReadStream())
+            {
+                await using (var fileStream = System.IO.File.Open(filePath, FileMode.Create))
+                {
+                    await stream.CopyToAsync(fileStream);
+                }
+            }
+
+            return Ok(fileModel.FileName);
         }
 
         #region Helper Methods
