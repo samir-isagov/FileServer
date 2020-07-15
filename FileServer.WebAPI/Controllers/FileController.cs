@@ -61,6 +61,18 @@ namespace FileServer.WebAPI.Controllers
             return Ok(fileModel.FileName);
         }
 
+        [HttpDelete("{subFolder}/{fileName}")]
+        public IActionResult DeleteFile([FromRoute] FileModel fileModel)
+        {
+            string filePath = GetFilePath(_rootFolder, fileModel.SubFolder, fileModel.FileName);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound();
+
+            System.IO.File.Delete(filePath);
+            return Ok();
+        }
+
         #region Helper Methods
 
         private string GetFilePath(string rootFolder, string subFolder, string fileName)
