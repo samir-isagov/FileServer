@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using FileServer.WebAPI.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -38,23 +39,27 @@ namespace FileServer.WebAPI.Controllers
         [HttpPost("{subFolder}")]
         public IActionResult AddFile(string subFolder)
         {
-            //todo 1. Generate File Name
+            //todo 1. Generate File Name. Note. Get File Extension from File Signature. Look: https://kec.az/B2HUr
             //todo 2. Get File Path
             //todo 3. Read file as stream from Request.Body
             //todo 4. Write FileStream to FilePath
+            
             return null;
         }
 
+        //todo Configure MultipartFormData
         [HttpPost("{subFolder}/{fileName}")]
-        public async Task<IActionResult> AddFile([FromForm] AddFileModel fileModel)
+        public async Task<IActionResult> AddFile([FromRoute] FileModel fileModel)
         {
             string filePath = GetFilePath(_rootFolder, fileModel.SubFolder, fileModel.FileName);
 
-            await using (var stream = fileModel.File.OpenReadStream())
+            await using (var fileStream = System.IO.File.Open(filePath, FileMode.Create))
             {
-                await using (var fileStream = System.IO.File.Open(filePath, FileMode.Create))
+                int bytesRead = 0;
+                byte[] buffer = new byte[2048];
+                while ((bytesRead = await Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
-                    await stream.CopyToAsync(fileStream);
+                    fileStream.Write(buffer, 0, bytesRead);
                 }
             }
 
