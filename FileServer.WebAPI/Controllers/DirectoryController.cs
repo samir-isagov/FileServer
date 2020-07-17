@@ -19,21 +19,37 @@ namespace FileServer.WebAPI.Controllers
         }
 
         [HttpPost("{subFolder}")]
-        public void Post(string subFolder)
+        public IActionResult Post(string subFolder)
         {
+            Directory.CreateDirectory(Path.Combine(RootFolder, subFolder));
 
+            return Ok(subFolder);
         }
 
-        [HttpPut("{subFolder}/{newSubFolder}")]
-        public void Put(string subFolder, string newSubFolder)
+        [HttpPut("{subFolder}")]
+        public IActionResult Put(string subFolder, string newSubFolder)
         {
+            string path = Path.Combine(RootFolder, subFolder);
+
+            if (string.IsNullOrEmpty(path.Trim()))
+                return BadRequest();
+
+            Directory.Move(path, Path.Combine(RootFolder, newSubFolder));
+
+            return Ok();
         }
 
         [HttpDelete("{subFolder}")]
-        public void Remove(string subFolder)
+        public IActionResult Remove(string subFolder)
         {
+            string path = Path.Combine(RootFolder, subFolder);
+
+            if (string.IsNullOrEmpty(path.Trim()))
+                return BadRequest();
+
+            Directory.Delete(Path.Combine(RootFolder, subFolder));
+
+            return Ok();
         }
-
-
     }
 }

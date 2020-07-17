@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FileServer.WebAPI.Controllers
 {
-    [Route("api")]
     public class FileController : BaseController
     {
         [HttpGet("{subFolder}/{fileName}")]
