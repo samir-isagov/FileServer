@@ -1,31 +1,18 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using MimeTypes;
 using System.Threading.Tasks;
 using FileServer.WebAPI.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using MimeTypes;
 
 namespace FileServer.WebAPI.Controllers
 {
-    [Authorize]
     [Route("api")]
-    [ApiController]
-    public class FileController : ControllerBase
+    public class FileController : BaseController
     {
-        private readonly IWebHostEnvironment _environment;
-        private readonly string _rootFolder = "App_Data";
-
-        public FileController(IWebHostEnvironment environment)
-        {
-            _environment = environment;
-        }
-
         [HttpGet("{subFolder}/{fileName}")]
         public IActionResult GetFile([FromRoute] FileModel fileModel)
         {
-            string filePath = GetFilePath(_rootFolder, fileModel.SubFolder, fileModel.FileName);
+            string filePath = GetFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
             Stream stream = !System.IO.File.Exists(filePath) ? null : new FileStream(filePath, FileMode.Open);
 
             if (stream == null)
@@ -51,7 +38,7 @@ namespace FileServer.WebAPI.Controllers
         [HttpPost("{subFolder}/{fileName}")]
         public async Task<IActionResult> AddFile([FromRoute] FileModel fileModel)
         {
-            string filePath = GetFilePath(_rootFolder, fileModel.SubFolder, fileModel.FileName);
+            string filePath = GetFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
 
             await using (var fileStream = System.IO.File.Open(filePath, FileMode.Create))
             {
@@ -69,7 +56,7 @@ namespace FileServer.WebAPI.Controllers
         [HttpDelete("{subFolder}/{fileName}")]
         public IActionResult DeleteFile([FromRoute] FileModel fileModel)
         {
-            string filePath = GetFilePath(_rootFolder, fileModel.SubFolder, fileModel.FileName);
+            string filePath = GetFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
 
             if (!System.IO.File.Exists(filePath))
                 return NotFound();
@@ -82,7 +69,7 @@ namespace FileServer.WebAPI.Controllers
 
         private string GetFilePath(string rootFolder, string subFolder, string fileName)
         {
-            string filePath = Path.Combine(_environment.WebRootPath, rootFolder, subFolder, fileName);
+            string filePath = Path.Combine(RootFolder, subFolder, fileName);
 
             return filePath;
         }

@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\App_Data\" />
+    <Folder Include="wwwroot\App_Data\esdas\int_doc\" />
+    <Folder Include="wwwroot\App_Data\esdas\inw_doc\" />
+    <Folder Include="wwwroot\App_Data\esdas\out_doc\" />
+    <Folder Include="wwwroot\App_Data\mtk\" />
+    <Folder Include="wwwroot\App_Data\tseras\" />
+    <Folder Include="wwwroot\App_Data\pension\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,10 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
 
 namespace FileServer.WebAPI.Controllers
 {
@@ -23,7 +23,7 @@ namespace FileServer.WebAPI.Controllers
         public IActionResult LogIn(string username, string password)
         {
             int storedUserId = 1;
-            string storedUsername = "kulpin";
+            string storedUsername = "esdas";
             string storedPassword = "kulpin123";
 
             if (username != storedUsername || password != storedPassword)
