@@ -1,5 +1,10 @@
 .navbar {
-  height: 6em;
+  height: 4.5em;
+  background-color: #4285F4;
+}
+
+.navbar a {
+  font-size: 1.5em;
 }
 
 .fa-refresh {
