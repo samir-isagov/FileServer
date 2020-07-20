@@ -1,10 +1,21 @@
 <nav class="navbar navbar-expand-md navbar-dark">
   <a class="navbar-brand ml-3" href="#">FileRun</a>
-  <button class="btn btn-light rounded-pill my-2 my-sm-0 ml-1 mr-auto" type="submit"><i
-    class="fa fa-plus mr-2"></i> New
+  <div class="btn btn-light rounded-pill my-2 my-sm-0 ml-1 plus-new">
+    <span><i class="fa fa-plus mr-2"></i>New</span>
+  </div>
+
+    <button type="button" class="btn btn-circle mr-auto" id="searchBtn"><i class="fa fa-search"></i>
+    </button>
+
+  <div class="custom-control-inline mr-0">
+    <button type="button" class="btn btn-circle" id="dotsBtn"><i class="fa fa-ellipsis-v"></i>
+    </button>
+    <span class="divider">|</span>
+    <button type="button" class="btn btn-circle"><i class="fa fa-refresh"></i>
+    </button>
+    <button type="button" class="btn btn-circle"><i class="fa fa-cog"></i>
+    </button>
+  </div>
+  <button type="button" class="btn btn-circle" id="user"><i class="fa fa-user"></i>
   </button>
-
-  <a href="" class="mr-5"><i class="fa fa-refresh"></i></a>
-
-  <img src="assets/images/user_default.jpg" class="rounded-circle float-right img-thumbnail mh-100">
 </nav>
