@@ -6,7 +6,8 @@ import {HeaderComponent} from './header/header.component';
 import {DirectoriesComponent} from './directories/directories.component';
 import {FilesComponent} from './files/files.component';
 import {HttpClientModule} from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {CollapseModule} from 'ngx-bootstrap/collapse';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgbModule
+    BrowserAnimationsModule,
+    CollapseModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
