@@ -1,65 +1,36 @@
 .navbar {
   height: 4.4em;
-  background-color: #4285F4;
   -webkit-box-shadow: 0 8px 6px -6px #999;
   -moz-box-shadow: 0 8px 6px -6px #999;
   box-shadow: 0 8px 6px -6px #999;
 }
 
-.navbar a {
-  font-size: 1.5em;
-}
-
-
 #user {
   background-color: blueviolet;
-  color: white;
   border-color: #76A5F2;
   border-width: medium;
-}
-
-#dotsBtn {
-  font-size: 0.8em;
-  margin-top: 0.2em;
-}
-
-.divider {
-  color: white;
-  font-size: 2.3em;
-  margin-top: -0.3em;
-  font-weight: 100;
-  opacity: 0.3;
-  margin-right: 0.5em;
 }
 
 #user:hover {
   border-color: white;
 }
 
-#searchBtn{
-  margin-left: 2em;
-  background-color: #4285F4;
-  -webkit-text-stroke: 1px #4285F4;
-  color: white;
-}
-
-.custom-control-inline > button, #searchBtn{
+button{
   margin-right: 1em;
-  background-color: #4285F4;
-  -webkit-text-stroke: 2px #4285F4;
+  -webkit-text-stroke: 2px #008CBA;
   color: white;
 }
 
-.custom-control-inline > button:hover, #searchBtn:hover {
+button:hover, #searchBtn:hover {
   background-color: white;
   -webkit-text-stroke: 2px white;
-  color: #4285F4;
+  color: #008CBA;
   transition: background-color 1ms linear;
   -webkit-transition: background-color 1ms linear;
   -ms-transition: background-color 1ms linear;
 }
 
-.custom-control-inline > button i, #searchBtn>i {
+button i {
   font-size: 1.7em;
   vertical-align: middle;
 }
@@ -76,7 +47,7 @@
 }
 
 .plus-new span i {
-  color: #4285F4;
+  color: #008CBA;
   -webkit-text-stroke: 1px #F8F9FA;
   vertical-align: middle;
   font-size: 1.6em;

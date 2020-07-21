@@ -1,21 +1,40 @@
-<nav class="navbar navbar-expand-md navbar-dark">
-  <a class="navbar-brand ml-3" href="#">FileRun</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand" href="#">File Server</a>
   <div class="btn btn-light rounded-pill my-2 my-sm-0 ml-1 plus-new">
     <span><i class="fa fa-plus mr-2"></i>New</span>
   </div>
 
-    <button type="button" class="btn btn-circle mr-auto" id="searchBtn"><i class="fa fa-search"></i>
-    </button>
-
-  <div class="custom-control-inline mr-0">
-    <button type="button" class="btn btn-circle" id="dotsBtn"><i class="fa fa-ellipsis-v"></i>
-    </button>
-    <span class="divider">|</span>
-    <button type="button" class="btn btn-circle"><i class="fa fa-refresh"></i>
-    </button>
-    <button type="button" class="btn btn-circle"><i class="fa fa-cog"></i>
-    </button>
-  </div>
-  <button type="button" class="btn btn-circle" id="user"><i class="fa fa-user"></i>
+  <button type="button" class="btn btn-circle mr-auto ml-3">
+    <i class="fa fa-search"></i>
   </button>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item border-right">
+        <button type="button" class="btn btn-circle">
+          <i class="fa fa-ellipsis-v"></i>
+        </button>
+      </li>
+      <li class="nav-item ml-3">
+        <button type="button" class="btn btn-circle">
+          <i class="fa fa-refresh"></i>
+        </button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-circle">
+          <i class="fa fa-cog"></i>
+        </button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-circle" id="user">
+          <i class="fa fa-user"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
 </nav>
