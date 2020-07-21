@@ -1,8 +1,19 @@
 .navbar {
-  height: 4.4em;
   -webkit-box-shadow: 0 8px 6px -6px #999;
   -moz-box-shadow: 0 8px 6px -6px #999;
   box-shadow: 0 8px 6px -6px #999;
+}
+button.navbar-toggler {
+  margin-right: 0.5em;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+.nav-item{
+  text-align: right;
+  margin: auto;
 }
 
 #user {
