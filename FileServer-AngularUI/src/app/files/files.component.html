@@ -2,6 +2,6 @@
   <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 file-item" *ngFor="let f of files">
     <img class="file-icon img-fluid" src="assets/images/file_icons/{{f.type}}.png">
     <br>
-    <span>{{f.name}}</span>
+    <span>{{f.name}} | {{f.size}} | {{f.createdDate}}</span>
   </div>
 </div>
