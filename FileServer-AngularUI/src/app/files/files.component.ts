@@ -4,7 +4,7 @@ import {FileService} from '../_services/file.service';
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
-  styleUrls: ['./files.component.css']
+  styleUrls: ['./files.component.scss']
 })
 export class FilesComponent implements OnInit {
   files: any = [];
