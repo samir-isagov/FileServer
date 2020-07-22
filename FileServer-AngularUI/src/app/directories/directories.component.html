@@ -1,1 +1,10 @@
-salam
+<accordion [isAnimated]="true">
+  <accordion-group heading="ROOT" [isOpen]="isFirstOpen" id="root">
+    <accordion [isAnimated]="true">
+      <accordion-group *ngFor="let directory of directories" heading="{{directory.folder}}">
+        <accordion-group *ngFor="let subFolder of directory.subFolders" heading="{{subFolder}}">
+        </accordion-group>
+      </accordion-group>
+    </accordion>
+  </accordion-group>
+</accordion>
