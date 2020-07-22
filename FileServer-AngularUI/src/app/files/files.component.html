@@ -1,7 +1,10 @@
 <div class="row">
-  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 file-item" *ngFor="let f of files">
+  <div class="col-xl-1 col-lg-2 col-md-2 col-sm-2 col-4 text-center" *ngFor="let f of files">
     <img class="file-icon img-fluid" src="assets/images/file_icons/{{f.type}}.png">
     <br>
-    <span>{{f.name}} | {{f.size}} | {{f.createdDate}}</span>
+    <div class="row">
+      <span class="file-name col-12">{{f.name}}</span>
+    </div>
+    <span class="file-info text-center">{{f.size}}|{{f.createdDate}}</span>
   </div>
 </div>
