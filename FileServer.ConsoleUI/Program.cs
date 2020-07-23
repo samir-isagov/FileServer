@@ -7,9 +7,9 @@ namespace FileServer.ConsoleUI
     {
         static void Main(string[] args)
         {
-            string subFolder = "esdas";
-            string fileName = "ttt.pdf";
-            var stream = File.OpenRead(@$"C:\Users\smrsgv\Desktop\esdas\{fileName}");
+            string subFolder = "int_doc";
+            string fileName = "2006071537020.pdf";
+            var stream = File.OpenRead(@$"C:\Users\smrsgv\Downloads\{fileName}");
 
             UploadAsStream(subFolder, fileName, stream);
         }
@@ -19,9 +19,9 @@ namespace FileServer.ConsoleUI
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add("Authorization",
-                    "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJrdWxwaW4iLCJuYmYiOjE1OTQ3NjMyMDksImV4cCI6MTU5NDg0OTYwOSwiaWF0IjoxNTk0NzYzMjA5fQ.rCkCeXLFGCQEnJE0sCSHvoE5v5zCQ6MKQEnkDWibRJlo7vl4QAXwkZYSQ8-2PjlVfXcA4NS9RR05p7bYK5e5zQ");
+                    "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJlc2RhcyIsIm5iZiI6MTU5NTUyNTg5MCwiZXhwIjoxNTk1NjEyMjkwLCJpYXQiOjE1OTU1MjU4OTB9.zOxONdE5oJYnBQp8Z0Dt0m7H3wrwl_FbFh7BFBlyNd4nnEJtrBKzPVPocSmxKcVnvee8DcjxKxURIYOztkhNcQ");
 
-                string url = $"http://localhost:6048/api/{subFolder}/{fileName}";
+                string url = $"http://localhost:6048/api/file/{subFolder}";
 
                 using (var content = new StreamContent(stream))
                 {

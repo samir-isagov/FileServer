@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\App_Data\esdas\int_doc\" />
     <Folder Include="wwwroot\App_Data\esdas\inw_doc\" />
     <Folder Include="wwwroot\App_Data\esdas\out_doc\" />
     <Folder Include="wwwroot\App_Data\mtk\" />
