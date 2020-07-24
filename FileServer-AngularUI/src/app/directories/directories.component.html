@@ -1,8 +1,17 @@
 <accordion [isAnimated]="true">
-  <accordion-group heading="ROOT" [isOpen]="isFirstOpen" id="root">
+  <accordion-group [isOpen]="isFirstOpen" (click)="toggleFolder()">
+      <span accordion-heading>
+      <i class='fa' [ngClass]="{'fa-folder-open-o': rootIsOpen,'fa-folder-o': !rootIsOpen}"></i> ROOT
+    </span>
     <accordion [isAnimated]="true">
-      <accordion-group *ngFor="let directory of directories" heading="{{directory.folder}}">
-        <accordion-group *ngFor="let subFolder of directory.subFolders" heading="{{subFolder}}">
+      <accordion-group *ngFor="let directory of directories">
+      <span accordion-heading>
+      <i class='fa fa-folder-o'></i> {{directory.folder}}
+    </span>
+        <accordion-group *ngFor="let subFolder of directory.subFolders" [isDisabled]="true">
+                <span accordion-heading>
+      <i class='fa fa-folder-o'></i> {{subFolder}}
+    </span>
         </accordion-group>
       </accordion-group>
     </accordion>

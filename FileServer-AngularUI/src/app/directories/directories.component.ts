@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-directories',
@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./directories.component.scss']
 })
 export class DirectoriesComponent implements OnInit {
+  rootIsOpen: boolean = true;
   directories: any = [];
   isFirstOpen = true;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.directories.push({folder: 'Sənəd dövriyyəsi AS', subFolders: ['Daxil olan', 'Daxili', 'Çıxan']});
@@ -16,4 +19,7 @@ export class DirectoriesComponent implements OnInit {
     this.directories.push({folder: 'Pensiya AS', subFolders: ['inw_doc', 'int_doc', 'out_doc']});
   }
 
+  toggleFolder() {
+    this.rootIsOpen = false;
+  }
 }
