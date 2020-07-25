@@ -44,7 +44,11 @@ namespace FileServer.WebAPI.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(claims),
+#if DEBUG
+                Expires = DateTime.Now.AddYears(1),
+#else
                 Expires = DateTime.Now.AddDays(1),
+#endif
                 SigningCredentials = creds
             };
 
