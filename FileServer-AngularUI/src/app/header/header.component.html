@@ -40,9 +40,9 @@
                     (click)="isUserCollapsed=!isUserCollapsed" [attr.aria-expanded]="!isCollapsed"
                     aria-controls="dropdown-animated"><i class="fa fa-user"></i>
             </button>
-            <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+            <ul id="dropdown-animated" *dropdownMenu class="user-dropdown-menu dropdown-menu dropdown-menu-right bg-white"
                 role="menu" aria-labelledby="user">
-              <li role="menuitem" (click)="logOut()"><a class="dropdown-item" href="#">Log Out</a></li>
+              <li role="menuitem" (click)="logOut()"><a class="dropdown-item bg-white text-dark" href="#">Log Out</a></li>
             </ul>
           </div>
         </li>

@@ -68,7 +68,7 @@ button i {
   width: 2.8em;
   height: 2.8em;
   padding: 6px 0px;
-  border-radius: 1.7em !important;
+  border-radius: 50% !important;
   text-align: center;
   line-height: 1.42857;
 }
@@ -77,3 +77,10 @@ button i {
   -webkit-text-stroke: 0px white;
 }
 
+.user-dropdown-menu{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+.user-dropdown-menu .dropdown-item{
+  font-family:Segoe UI;
+}
