@@ -16,13 +16,17 @@ import {RouterModule} from '@angular/router';
 import {ErrorInterceptor} from './_services/error.interceptor';
 import {appRoutes} from './routes';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import { HomeComponent } from './home/home.component';
+import { FileServerComponent } from './file-server/file-server.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     DirectoriesComponent,
-    FilesComponent
+    FilesComponent,
+    HomeComponent,
+    FileServerComponent
   ],
   imports: [
     BrowserModule,

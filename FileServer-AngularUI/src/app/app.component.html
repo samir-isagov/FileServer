@@ -1,15 +1,2 @@
 <app-header></app-header>
-<div *ngIf="!loggedIn()" class="text-center mt-5">
-  <h1>AIST Group File Server</h1>
-  <p class="lead">File Server-i görmək üçün ilk öncə daxil olmağınız vacibdir!</p>
-</div>
-<div class="container mt-2" *ngIf="loggedIn()">
-  <div class="row">
-    <div class="col-2 shadow mt-2 vh-custom">
-      <app-directories></app-directories>
-    </div>
-    <div class="col-10">
-      <app-files></app-files>
-    </div>
-  </div>
-</div>
+<router-outlet></router-outlet>

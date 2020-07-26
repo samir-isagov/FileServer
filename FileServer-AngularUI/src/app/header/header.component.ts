@@ -26,7 +26,8 @@ export class HeaderComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     }, ()=>{
-      this.router.navigate(['/']);
+      console.log('sasasdsadasd');
+      this.router.navigate(['/file-server']);
     });
   }
 
