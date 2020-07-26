@@ -1,5 +1,7 @@
 using System;
+using System.Net;
 using System.Text;
+using FileServer.WebAPI.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -7,6 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace FileServer.WebAPI
@@ -51,9 +55,27 @@ namespace FileServer.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                        var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
+                        if (exceptionHandlerFeature!=null)
+                        {
+                            context.Response.AddApplicationError(exceptionHandlerFeature.Error.Message);
+                            await context.Response.WriteAsync(exceptionHandlerFeature.Error.Message);
+                        }
+                    });
+                });
+            }
 
             app.UseRouting();
 
+            app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             
             app.UseAuthentication();
 

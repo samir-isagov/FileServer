@@ -4,6 +4,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using FileServer.WebAPI.Dtos;
 using Microsoft.Extensions.Configuration;
 
 namespace FileServer.WebAPI.Controllers
@@ -20,13 +21,13 @@ namespace FileServer.WebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult LogIn(string username, string password)
+        public IActionResult LogIn(UserForLoginDto userForLoginDto)
         {
             int storedUserId = 1;
             string storedUsername = "esdas";
             string storedPassword = "kulpin123";
 
-            if (username != storedUsername || password != storedPassword)
+            if (userForLoginDto.Username != storedUsername || userForLoginDto.Password != storedPassword)
             {
                 return Unauthorized();
             }
