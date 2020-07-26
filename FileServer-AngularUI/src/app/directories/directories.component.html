@@ -1,9 +1,10 @@
 <accordion [isAnimated]="true">
 
 
-  <accordion-group class="pt-2" [isOpen]="isFirstOpen" (click)="toggleFolder()">
-    <span accordion-heading>
-      <i class='fa text-' [ngClass]="{'fa-folder-open-o': rootIsOpen,'fa-folder-o': !rootIsOpen}"></i> ROOT
+  <accordion-group class="pt-2" [isOpen]="isFirstOpen">
+    <span accordion-heading (click)="toggleFolder()">
+      <i class='fa text-info mr-2' [ngClass]="{'fa-folder-open-o': rootIsOpen,'fa-folder-o': !rootIsOpen}"></i>
+      Root
     </span>
 
 
@@ -12,12 +13,12 @@
       <accordion-group *ngFor="let directory of directories; let i = index" [isOpen]="i===0 ? isFirstOpen : false">
 
         <span accordion-heading>
-          <i class='fa fa-folder-o'></i> {{directory.folder}}
+          <i class='fa text-info mr-2 fa-folder-open-o'></i> {{directory.folder}}
         </span>
 
         <accordion-group *ngFor="let subFolder of directory.subFolders" [isDisabled]="true">
           <span accordion-heading>
-            <i class='fa fa-folder-o'></i> {{subFolder}}
+            <i class='fa text-info mr-2 fa-folder-open-o'></i> {{subFolder}}
           </span>
         </accordion-group>
 

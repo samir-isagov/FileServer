@@ -20,6 +20,6 @@ export class DirectoriesComponent implements OnInit {
   }
 
   toggleFolder() {
-    this.rootIsOpen = false;
+    this.rootIsOpen = !this.rootIsOpen;
   }
 }
