@@ -1,35 +1,15 @@
 accordion-group {
   ::ng-deep {
     .panel-body.card-block.card-body {
-      padding: 0;
+      padding-right: 0;
     }
 
     .panel-heading.card-header {
-      padding: 0;
+      padding-right: 0;
     }
 
+    .panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+      border: none;
+    }
   }
 }
-
-//panel-body card-block card-body
-
-
-
-
-//accordion-group {
-//  ::ng-deep {
-//    div {
-//      &>div.panel-heading.card-header.panel-enabled {
-//        background-color: rgba(52, 58, 64, 0.15); // change the background of every accordion heading
-//
-//        .btn-link {
-//          color: rgb(6, 10, 9); // change the accordion heading buttons style
-//        }
-//      }
-//
-//      &>div.panel-collapse.collapse.in.show>div {
-//        background-color: hsla(210, 10%, 83%, 0.10); // change the expanded content style
-//      }
-//    }
-//  }
-//}
