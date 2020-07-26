@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from './_services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'FileServer-AngularUI';
+  registerMode = false;
+
+  constructor(private authService: AuthService) {
+  }
+
+  loggedIn() {
+    return this.authService.loggedIn();
+  }
 }

@@ -68,8 +68,12 @@ button i {
   width: 2.8em;
   height: 2.8em;
   padding: 6px 0px;
-  border-radius: 1.7em;
+  border-radius: 1.7em !important;
   text-align: center;
   line-height: 1.42857;
+}
+
+.btn.btn-success {
+  -webkit-text-stroke: 0px white;
 }
 

@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <div class="container">
     <a class="navbar-brand" href="#">File Server</a>
+    <div *ngIf="loggedIn()">
     <div class="btn btn-light rounded-pill my-2 my-sm-0 ml-1 plus-new">
       <span><i class="fa fa-plus mr-2"></i>New</span>
     </div>
@@ -8,6 +9,8 @@
     <button type="button" class="btn btn-circle mr-auto ml-3">
       <i class="fa fa-search"></i>
     </button>
+
+    </div>
 
     <button class="navbar-toggler" type="button" (click)="isCollapsed=!isCollapsed" [attr.aria-expanded]="!isCollapsed"
             aria-controls="navbarSupportedContent">
