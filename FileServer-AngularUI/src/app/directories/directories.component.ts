@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./directories.component.scss']
 })
 export class DirectoriesComponent implements OnInit {
-  rootIsOpen: boolean = true;
+  rootIsOpen = true;
   directories: any = [];
   isFirstOpen = true;
 
