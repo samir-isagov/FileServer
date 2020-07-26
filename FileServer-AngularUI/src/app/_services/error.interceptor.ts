@@ -37,7 +37,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
           }
 
-          return throwError(modelStateErrors || srvError || 'Something went wrong on server :(');
+          return throwError(modelStateErrors || srvError || 'Server işləmir və ya xəta baş verdi! :(');
         }
       })
     );

@@ -22,18 +22,17 @@ export class HeaderComponent implements OnInit {
 
   login() {
     this.authService.login(this.userTemplate).subscribe(next => {
-      this.alertify.success('Success');
+      this.alertify.success('Uğurla daxil oldunuz!');
     }, error => {
       this.alertify.error(error);
     }, ()=>{
-      console.log('sasasdsadasd');
       this.router.navigate(['/file-server']);
     });
   }
 
   logOut() {
     localStorage.removeItem('token');
-    this.alertify.message('Logged out');
+    this.alertify.message('Hesabdan çıxış olundu');
     this.router.navigate(['/']);
   }
 

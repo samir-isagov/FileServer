@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    this.alertify.error('Access denied. Please log in');
+    this.alertify.error('İcazə yoxdur. Öncə daxil olun.');
     this.router.navigate(['/home']);
 
     return false;
