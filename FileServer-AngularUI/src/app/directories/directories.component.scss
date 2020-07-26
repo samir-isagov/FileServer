@@ -8,7 +8,7 @@ accordion-group {
       padding-right: 0;
     }
 
-    .panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    .panel, .panel-group .panel-heading + .panel-collapse > .panel-body {
       border: none;
     }
   }

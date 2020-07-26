@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from '../_services/auth.service';
 import {Router} from '@angular/router';
 import {AlertifyService} from '../_services/alertify.service';
@@ -8,7 +8,7 @@ import {AlertifyService} from '../_services/alertify.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   isCollapsed = true;
   isUserCollapsed = true;
 
@@ -17,15 +17,12 @@ export class HeaderComponent implements OnInit {
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) {
   }
 
-  ngOnInit(): void {
-  }
-
   login() {
     this.authService.login(this.userTemplate).subscribe(next => {
       this.alertify.success('Uğurla daxil oldunuz!');
     }, error => {
       this.alertify.error(error);
-    }, ()=>{
+    }, () => {
       this.router.navigate(['/file-server']);
     });
   }

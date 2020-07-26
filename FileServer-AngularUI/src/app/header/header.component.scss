@@ -3,6 +3,7 @@
   -moz-box-shadow: 0 8px 6px -6px #999;
   box-shadow: 0 8px 6px -6px #999;
 }
+
 button.navbar-toggler {
   margin-right: 0.5em;
 }
@@ -11,7 +12,7 @@ button.navbar-toggler {
   flex-direction: row;
 }
 
-.nav-item{
+.nav-item {
   text-align: right;
   margin: auto;
 }
@@ -26,10 +27,11 @@ button.navbar-toggler {
   border-color: white;
 }
 
-button{
+button {
   margin-right: 1em;
   -webkit-text-stroke: 2px #008CBA;
   color: white;
+  cursor: pointer;
 }
 
 button:hover, #searchBtn:hover {
@@ -77,10 +79,11 @@ button i {
   -webkit-text-stroke: 0px white;
 }
 
-.user-dropdown-menu{
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.user-dropdown-menu {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
-.user-dropdown-menu .dropdown-item{
-  font-family:Segoe UI;
+
+.user-dropdown-menu .dropdown-item {
+  font-family: Segoe UI;
 }
