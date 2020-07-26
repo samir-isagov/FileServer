@@ -9,6 +9,13 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {DirectoriesComponent} from './directories/directories.component';
 import {FilesComponent} from './files/files.component';
+import {FormsModule} from '@angular/forms';
+import {AuthService} from './_services/auth.service';
+import {AlertifyService} from './_services/alertify.service';
+import {RouterModule} from '@angular/router';
+import {ErrorInterceptor} from './_services/error.interceptor';
+import {appRoutes} from './routes';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -22,9 +29,12 @@ import {FilesComponent} from './files/files.component';
     HttpClientModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
+    BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [AuthService, AlertifyService, ErrorInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule {
