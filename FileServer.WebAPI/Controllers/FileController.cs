@@ -54,7 +54,6 @@ namespace FileServer.WebAPI.Controllers
             
             if (System.IO.File.Exists(filePath))
                 return BadRequest("File name is exists!");
-            
 
             await using (var fileStream = System.IO.File.Open(filePath, FileMode.Create))
             {
