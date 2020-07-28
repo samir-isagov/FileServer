@@ -1,9 +1,9 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-
-namespace FileServer.WebAPI.Controllers
+﻿namespace FileServer.WebAPI.Controllers
 {
+    using System.IO;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+
     public class DirectoryController : BaseController
     {
         [HttpGet]

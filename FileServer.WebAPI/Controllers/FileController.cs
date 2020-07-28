@@ -1,18 +1,20 @@
-﻿using System;
-using System.IO;
-using MimeTypes;
-using System.Threading.Tasks;
-using FileServer.WebAPI.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace FileServer.WebAPI.Controllers
+﻿namespace FileServer.WebAPI.Controllers
 {
+    using System;
+    using System.IO;
+    using MimeTypes;
+    using Common.Dtos;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Application.Common.Helpers;
+    using Application.Files.Commands.AddFile;
+
     public class FileController : BaseController
     {
         [HttpGet("{subFolder}/{fileName}")]
-        public IActionResult GetFile([FromRoute] FileModel fileModel)
+        public IActionResult GetFile([FromRoute] FileDto fileModel)
         {
-            string filePath = GetFilePath(fileModel.SubFolder, fileModel.FileName);
+            string filePath = PathGenerator.GenerateFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
             Stream stream = !System.IO.File.Exists(filePath) ? null : new FileStream(filePath, FileMode.Open);
 
             if (stream == null)
@@ -31,7 +33,7 @@ namespace FileServer.WebAPI.Controllers
             string fileEx = "";
             string fileFullName = $@"{Guid.NewGuid()}.{fileEx}";
 
-            string filePath = GetFilePath(subFolder, fileFullName);
+            string filePath = PathGenerator.GenerateFilePath(RootFolder, subFolder, fileFullName);
 
             await using (var fileStream = System.IO.File.Open(filePath, FileMode.Create))
             {
@@ -48,31 +50,24 @@ namespace FileServer.WebAPI.Controllers
 
         //todo: Configure MultipartFormData
         [HttpPost("{subFolder}/{fileName}")]
-        public async Task<IActionResult> AddFile([FromRoute] FileModel fileModel)
+        public async Task<IActionResult> AddFile(string subFolder, string fileName)
         {
-            string filePath = GetFilePath(fileModel.SubFolder, fileModel.FileName);
-            
-            if (System.IO.File.Exists(filePath))
-                return BadRequest("File name is exists!");
-
-            await using (var fileStream = System.IO.File.Open(filePath, FileMode.Create))
+            fileName = await Mediator.Send(new AddFileCommand
             {
-                int bytesRead = 0;
-                byte[] buffer = new byte[2048];
-                while ((bytesRead = await Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                {
-                    fileStream.Write(buffer, 0, bytesRead);
-                }
-            }
+                RootFolder = RootFolder,
+                SubFolder = subFolder,
+                FileName = fileName,
+                File = Request.Body
+            });
 
-            return Ok(fileModel.FileName);
+            return Ok(fileName);
         }
 
         [HttpPut("{subFolder}/{fileName}")]
-        public async Task<IActionResult> UpdateFile([FromRoute] FileModel fileModel)
+        public async Task<IActionResult> UpdateFile([FromRoute] FileDto fileModel)
         {
-            string filePath = GetFilePath(fileModel.SubFolder, fileModel.FileName);
-            
+            string filePath = PathGenerator.GenerateFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
+
             if (!System.IO.File.Exists(filePath))
                 return BadRequest("File name is not exists!");
             
@@ -90,9 +85,9 @@ namespace FileServer.WebAPI.Controllers
         }
 
         [HttpDelete("{subFolder}/{fileName}")]
-        public IActionResult DeleteFile([FromRoute] FileModel fileModel)
+        public IActionResult DeleteFile([FromRoute] FileDto fileModel)
         {
-            string filePath = GetFilePath(fileModel.SubFolder, fileModel.FileName);
+            string filePath = PathGenerator.GenerateFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
 
             if (!System.IO.File.Exists(filePath))
                 return NotFound();
@@ -100,16 +95,5 @@ namespace FileServer.WebAPI.Controllers
             System.IO.File.Delete(filePath);
             return Ok();
         }
-
-        #region Helper Methods
-
-        private string GetFilePath(string subFolder, string fileName)
-        {
-            string filePath = Path.Combine(RootFolder, subFolder, fileName);
-
-            return filePath;
-        }
-
-        #endregion
     }
 }

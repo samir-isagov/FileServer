@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FileServer.WebAPI.Models
+﻿namespace FileServer.WebAPI.Common.Dtos
 {
-    public class FileModel
+    using System.ComponentModel.DataAnnotations;
+
+    public class FileDto
     {
         //todo accept subFolder with '_' symbol
         [RegularExpression("^[a-zA-Z_]+$", ErrorMessage = "SubFolder must contain only letters")]

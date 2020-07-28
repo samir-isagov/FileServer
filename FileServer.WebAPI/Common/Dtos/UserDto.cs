@@ -1,6 +1,6 @@
-﻿namespace FileServer.WebAPI.Dtos
+﻿namespace FileServer.WebAPI.Common.Dtos
 {
-    public class UserForLoginDto
+    public class UserDto
     {
         public string Username { get; set; }
         public string Password { get; set; }

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace FileServer.WebAPI.Helpers
+﻿namespace FileServer.WebAPI.Common.Extensions
 {
-    public static class Extensions
+    using Microsoft.AspNetCore.Http;
+
+    public static class HttpResponseExtension
     {
         public static void AddApplicationError(this HttpResponse response, string message)
         {

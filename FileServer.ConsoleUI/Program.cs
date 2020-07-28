@@ -1,8 +1,8 @@
-﻿using System.IO;
-using System.Net.Http;
-
-namespace FileServer.ConsoleUI
+﻿namespace FileServer.ConsoleUI
 {
+    using System.IO;
+    using System.Net.Http;
+
     class Program
     {
         static void Main(string[] args)

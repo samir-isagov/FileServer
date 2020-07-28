@@ -1,10 +1,10 @@
-using App.Metrics.AspNetCore;
-using App.Metrics.Formatters.Prometheus;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-
 namespace FileServer.WebAPI
 {
+    using App.Metrics.AspNetCore;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
+    using App.Metrics.Formatters.Prometheus;
+
     public class Program
     {
         public static void Main(string[] args)

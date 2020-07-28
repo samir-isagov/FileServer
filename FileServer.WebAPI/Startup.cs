@@ -1,20 +1,21 @@
-using System;
-using System.Net;
-using System.Text;
-using FileServer.WebAPI.Helpers;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-
 namespace FileServer.WebAPI
 {
+    using System;
+    using System.Net;
+    using System.Text;
+    using Application;
+    using Common.Extensions;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.IdentityModel.Tokens;
+    using Microsoft.AspNetCore.Diagnostics;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.AspNetCore.Server.Kestrel.Core;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -32,8 +33,9 @@ namespace FileServer.WebAPI
             });
 
             services.AddMetrics();
-
+            services.AddApplication();
             services.AddControllers();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
             {
                 option.TokenValidationParameters = new TokenValidationParameters()
