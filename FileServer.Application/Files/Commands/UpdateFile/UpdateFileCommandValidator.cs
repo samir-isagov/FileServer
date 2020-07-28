@@ -1,11 +1,11 @@
-﻿namespace FileServer.Application.Files.Commands.CreateFile
+﻿namespace FileServer.Application.Files.Commands.UpdateFile
 {
     using FluentValidation;
     using Common.Validators;
 
-    public class CreateFileCommandValidator : AbstractValidator<CreateFileCommand>
+    public class UpdateFileCommandValidator : AbstractValidator<UpdateFileCommand>
     {
-        public CreateFileCommandValidator()
+        public UpdateFileCommandValidator()
         {
             RuleFor(x => x.SubFolder).NotEmpty().MustBeFolderName();
             RuleFor(x => x.FileName).NotEmpty().MustBeFileName();

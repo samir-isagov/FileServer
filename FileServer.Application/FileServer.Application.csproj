@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Files\Commands\DeleteFile\" />
-    <Folder Include="Files\Commands\UpdateFile\" />
   </ItemGroup>
 
 </Project>

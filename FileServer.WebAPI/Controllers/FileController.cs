@@ -1,13 +1,12 @@
 ﻿namespace FileServer.WebAPI.Controllers
 {
-    using System;
-    using System.IO;
     using Common.Dtos;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Application.Common.Helpers;
     using Application.Files.Commands.CreateFile;
     using FileServer.Application.Files.Queries.GetFile;
+    using FileServer.Application.Files.Commands.UpdateFile;
 
     public class FileController : BaseController
     {
@@ -57,24 +56,17 @@
         }
 
         [HttpPut("{subFolder}/{fileName}")]
-        public async Task<IActionResult> UpdateFile([FromRoute] FileDto fileModel)
+        public async Task<IActionResult> UpdateFile(string subFolder, string fileName)
         {
-            string filePath = PathUtility.GetFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
-
-            if (!System.IO.File.Exists(filePath))
-                return BadRequest("File name is not exists!");
-            
-            await using (var fileStream = System.IO.File.Open(filePath, FileMode.Create))
+            fileName = await Mediator.Send(new UpdateFileCommand
             {
-                int bytesRead = 0;
-                byte[] buffer = new byte[2048];
-                while ((bytesRead = await Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                {
-                    fileStream.Write(buffer, 0, bytesRead);
-                }
-            }
+                RootFolder = RootFolder,
+                SubFolder = subFolder,
+                FileName = fileName,
+                File = Request.Body
+            });
 
-            return Ok(fileModel.FileName);
+            return Ok(fileName);
         }
 
         [HttpDelete("{subFolder}/{fileName}")]
