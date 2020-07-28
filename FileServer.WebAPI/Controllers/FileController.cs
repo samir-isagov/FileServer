@@ -2,57 +2,50 @@
 {
     using System;
     using System.IO;
-    using MimeTypes;
     using Common.Dtos;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Application.Common.Helpers;
-    using Application.Files.Commands.AddFile;
+    using Application.Files.Commands.CreateFile;
+    using FileServer.Application.Files.Queries.GetFile;
 
     public class FileController : BaseController
     {
         [HttpGet("{subFolder}/{fileName}")]
-        public IActionResult GetFile([FromRoute] FileDto fileModel)
+        public async Task<IActionResult> GetFile(string subFolder, string fileName)
         {
-            string filePath = PathGenerator.GenerateFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
-            Stream stream = !System.IO.File.Exists(filePath) ? null : new FileStream(filePath, FileMode.Open);
+            var response = await Mediator.Send(new GetFileQuery
+            {
+                RootFolder = RootFolder,
+                SubFolder = subFolder,
+                FileName  = fileName
+            });
 
-            if (stream == null)
-                return NotFound();
-
-            string fileExtension = fileModel.FileName.Split('.')[1];
-            string mimeType = MimeTypeMap.GetMimeType(fileExtension);
-
-            return File(stream, mimeType);
+            return File(response.File, response.MimeType);
         }
 
         //todo: Get File Extension from File Signature. Look: https://kec.az/B2HUr
         [HttpPost("{subFolder}")]
         public async Task<IActionResult> AddFile(string subFolder)
         {
-            string fileEx = "";
-            string fileFullName = $@"{Guid.NewGuid()}.{fileEx}";
+            string fileName = FileUtility.GetUniqueFileName("");
 
-            string filePath = PathGenerator.GenerateFilePath(RootFolder, subFolder, fileFullName);
-
-            await using (var fileStream = System.IO.File.Open(filePath, FileMode.Create))
+            fileName = await Mediator.Send(new CreateFileCommand
             {
-                int bytesRead = 0;
-                byte[] buffer = new byte[2048];
-                while ((bytesRead = await Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                {
-                    fileStream.Write(buffer, 0, bytesRead);
-                }
-            }
+                RootFolder = RootFolder,
+                SubFolder = subFolder,
+                FileName = fileName,
+                File = Request.Body
+            });
 
-            return Ok(fileFullName);
+            return Ok(fileName);
         }
 
         //todo: Configure MultipartFormData
         [HttpPost("{subFolder}/{fileName}")]
         public async Task<IActionResult> AddFile(string subFolder, string fileName)
         {
-            fileName = await Mediator.Send(new AddFileCommand
+            fileName = await Mediator.Send(new CreateFileCommand
             {
                 RootFolder = RootFolder,
                 SubFolder = subFolder,
@@ -66,7 +59,7 @@
         [HttpPut("{subFolder}/{fileName}")]
         public async Task<IActionResult> UpdateFile([FromRoute] FileDto fileModel)
         {
-            string filePath = PathGenerator.GenerateFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
+            string filePath = PathUtility.GetFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
 
             if (!System.IO.File.Exists(filePath))
                 return BadRequest("File name is not exists!");
@@ -87,7 +80,7 @@
         [HttpDelete("{subFolder}/{fileName}")]
         public IActionResult DeleteFile([FromRoute] FileDto fileModel)
         {
-            string filePath = PathGenerator.GenerateFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
+            string filePath = PathUtility.GetFilePath(RootFolder, fileModel.SubFolder, fileModel.FileName);
 
             if (!System.IO.File.Exists(filePath))
                 return NotFound();

@@ -2,14 +2,14 @@
 {
     using System.IO;
 
-    public static class PathGenerator
+    public static class PathUtility
     {
-        public static string GenerateFolderPath(string rootFolder, string subFolder)
+        public static string GetFolderPath(string rootFolder, string subFolder)
         {
             return Path.Combine(rootFolder, subFolder);
         }
 
-        public static string GenerateFilePath(string rootFolder, string subFolder, string fileName)
+        public static string GetFilePath(string rootFolder, string subFolder, string fileName)
         {
             return Path.Combine(rootFolder, subFolder, fileName);
         }

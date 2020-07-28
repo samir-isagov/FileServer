@@ -1,4 +1,4 @@
-﻿namespace FileServer.Application.Files.Commands.AddFile
+﻿namespace FileServer.Application.Files.Commands.CreateFile
 {
     using MediatR;
     using System.IO;
@@ -7,12 +7,12 @@
     using Common.Exceptions;
     using System.Threading.Tasks;
 
-    public class AddFileCommandHandler : IRequestHandler<AddFileCommand, string>
+    public class CreateFileCommandHandler : IRequestHandler<CreateFileCommand, string>
     {
-        public async Task<string> Handle(AddFileCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateFileCommand request, CancellationToken cancellationToken)
         {
-            string folderPath = PathGenerator.GenerateFolderPath(request.RootFolder, request.SubFolder);
-            string filePath = PathGenerator.GenerateFilePath(request.RootFolder, request.SubFolder, request.FileName);
+            string folderPath = PathUtility.GetFolderPath(request.RootFolder, request.SubFolder);
+            string filePath = PathUtility.GetFilePath(request.RootFolder, request.SubFolder, request.FileName);
 
             if (!Directory.Exists(folderPath))
                 throw new NotFoundException($"Folder is not found. Folder path is {folderPath}");

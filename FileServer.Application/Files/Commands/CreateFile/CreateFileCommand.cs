@@ -1,9 +1,9 @@
-﻿namespace FileServer.Application.Files.Commands.AddFile
+﻿namespace FileServer.Application.Files.Commands.CreateFile
 {
     using MediatR;
     using System.IO;
 
-    public class AddFileCommand : IRequest<string>
+    public class CreateFileCommand : IRequest<string>
     {
         public string RootFolder { get; set; }
 
